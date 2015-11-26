@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///Volumes/Data/nfs/zfs-student-3/users/2013/jflorimo/AndroidStudioProjects/ft_hangouts/app/app.iml" filepath="/Volumes/Data/nfs/zfs-student-3/users/2013/jflorimo/AndroidStudioProjects/ft_hangouts/app/app.iml" />
-      <module fileurl="file:///Volumes/Data/nfs/zfs-student-3/users/2013/jflorimo/AndroidStudioProjects/ft_hangouts/ft_hangouts.iml" filepath="/Volumes/Data/nfs/zfs-student-3/users/2013/jflorimo/AndroidStudioProjects/ft_hangouts/ft_hangouts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hangouts_sample.iml" filepath="$PROJECT_DIR$/hangouts_sample.iml" />
     </modules>
   </component>
 </project>

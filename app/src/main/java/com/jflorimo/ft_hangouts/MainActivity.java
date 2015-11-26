@@ -1,11 +1,14 @@
 package com.jflorimo.ft_hangouts;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView contactList;
+	private Button addContactButton;
 
 	List<Contact> contacts = new ArrayList<>();
 
@@ -23,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contactList = (ListView)findViewById(R.id.contactList);
+		addContactButton = (Button)findViewById(R.id.addButton);
+
+		addContactButton.setOnClickListener(addContactListener);
 		displayContacts();
     }
 
@@ -46,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+	View.OnClickListener addContactListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Intent addContactActivity = new Intent(MainActivity.this, AddContactActivity.class);
+			startActivity(addContactActivity);
+		}
+	};
 
 	private void displayContacts(){
 		contacts.add(new Contact(Color.BLACK, "Florent", "Mon premier tweet !"));

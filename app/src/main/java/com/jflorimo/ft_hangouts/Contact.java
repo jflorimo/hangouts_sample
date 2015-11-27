@@ -6,13 +6,17 @@ package com.jflorimo.ft_hangouts;
 public class Contact {
 	private int color;
 	private String login;
-	private String text;
+	private String number;
+	private String email;
+	private String adress;
 
-	public Contact(int color, String login, String text)
+	public Contact(int color, String login, String number, String email, String adress)
 	{
 		this.color = color;
 		this.login = login;
-		this.text = text;
+		this.number = number;
+		this.email = email;
+		this.adress = adress;
 	}
 
 	public int getColor() {
@@ -31,11 +35,27 @@ public class Contact {
 		this.login = login;
 	}
 
-	public String getText() {
-		return text;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
 }

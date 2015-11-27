@@ -33,7 +33,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 		if(viewHolder == null){
 			viewHolder = new ContactViewHolder();
 			viewHolder.login = (TextView) convertView.findViewById(R.id.login);
-			viewHolder.text = (TextView) convertView.findViewById(R.id.text);
+			viewHolder.number = (TextView) convertView.findViewById(R.id.number);
 			viewHolder.picture = (ImageView) convertView.findViewById(R.id.picture);
 			convertView.setTag(viewHolder);
 		}
@@ -41,7 +41,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 		//getItem(position) va récupérer l'item [position] de la List<Tweet> tweets
 		Contact contact = getItem(position);
 		viewHolder.login.setText(contact.getLogin());
-		viewHolder.text.setText(contact.getText());
+		viewHolder.number.setText(contact.getNumber());
 		viewHolder.picture.setImageDrawable(new ColorDrawable(contact.getColor()));
 
 		return convertView;
@@ -50,7 +50,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 	private class ContactViewHolder{
 		public ImageView picture;
 		public TextView login;
-		public TextView text;
+		public TextView number;
 
 	}
 }

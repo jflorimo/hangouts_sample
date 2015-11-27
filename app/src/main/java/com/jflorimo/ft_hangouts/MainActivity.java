@@ -63,21 +63,9 @@ public class MainActivity extends AppCompatActivity {
 	};
 
 	private void displayContacts(){
-		contacts.add(new Contact(Color.BLACK, "Florent", "Mon premier tweet !"));
-		contacts.add(new Contact(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
-		contacts.add(new Contact(Color.GREEN, "Logan", "Que c'est beau..."));
-		contacts.add(new Contact(Color.RED, "Mathieu", "Il est quelle heure ??"));
-		contacts.add(new Contact(Color.GRAY, "Willy", "On y est presque"));
-		contacts.add(new Contact(Color.BLACK, "Florent", "Mon premier tweet !"));
-		contacts.add(new Contact(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
-		contacts.add(new Contact(Color.GREEN, "Logan", "Que c'est beau..."));
-		contacts.add(new Contact(Color.RED, "Mathieu", "Il est quelle heure ??"));
-		contacts.add(new Contact(Color.GRAY, "Willy", "On y est presque"));
-		contacts.add(new Contact(Color.BLACK, "Florent", "Mon premier tweet !"));
-		contacts.add(new Contact(Color.BLUE, "Kevin", "C'est ici que ça se passe !"));
-		contacts.add(new Contact(Color.GREEN, "Logan", "Que c'est beau..."));
-		contacts.add(new Contact(Color.RED, "Mathieu", "Il est quelle heure ??"));
-		contacts.add(new Contact(Color.GRAY, "Willy", "On y est presque"));
+		contacts.add(new Contact(Color.BLACK, "Florent", "0664256526", "", ""));
+		contacts.add(new Contact(Color.BLUE, "Kevin", "0664256526", "", ""));
+
 
 		ContactAdapter adapter = new ContactAdapter(MainActivity.this, contacts);
 		contactList.setAdapter(adapter);

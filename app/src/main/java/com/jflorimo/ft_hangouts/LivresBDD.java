@@ -8,9 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * Created by jflorimo on 27/11/15.
  */
-public class ContactManager {
+public class LivresBDD {
+
 	private static final int VERSION_BDD = 1;
-	private static final String NOM_BDD = "eleves.db";
+	private static final String NOM_BDD = "conta.db";
 
 	private static final String TABLE_LIVRES = "table_livres";
 	private static final String COL_ID = "ID";
@@ -22,11 +23,11 @@ public class ContactManager {
 
 	private SQLiteDatabase bdd;
 
-	private ContactManagerSql maBaseSQLite;
+	private MaBaseSQLite maBaseSQLite;
 
-	public ContactManager(Context context){
+	public LivresBDD(Context context){
 		//On créer la BDD et sa table
-		maBaseSQLite = new ContactManagerSql(context);
+		maBaseSQLite = new MaBaseSQLite(context, NOM_BDD, null, VERSION_BDD);
 	}
 
 	public void open(){
@@ -43,7 +44,7 @@ public class ContactManager {
 		return bdd;
 	}
 
-	public long insertcontact(Contact elem){
+	public long insertLivre(Livre livre){
 		//Création d'un ContentValues (fonctionne comme une HashMap)
 		ContentValues values = new ContentValues();
 		//on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)

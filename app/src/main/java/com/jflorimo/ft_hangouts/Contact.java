@@ -5,6 +5,7 @@ package com.jflorimo.ft_hangouts;
  */
 public class Contact {
 	private int color;
+	private int id;
 	private String login;
 	private String number;
 	private String email;
@@ -17,6 +18,16 @@ public class Contact {
 		this.number = number;
 		this.email = email;
 		this.adress = adress;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	public int getId()
+	{
+		return this.id;
 	}
 
 	public int getColor() {
@@ -57,5 +68,10 @@ public class Contact {
 
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+
+	public String toString()
+	{
+		return "login:" + login + " number:" + number + " email:" + email + " adress:" + adress;
 	}
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView contactList;
 	private Button addContactButton;
-
+    private ContactBDD bdd;
 	List<Contact> contacts = new ArrayList<>();
 
     @Override
@@ -26,11 +27,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bdd = new ContactBDD(this);
+        bdd.open();
+
         contactList = (ListView)findViewById(R.id.contactList);
 		addContactButton = (Button)findViewById(R.id.addButton);
 
 		addContactButton.setOnClickListener(addContactListener);
 		displayContacts();
+
+
+
     }
 
     @Override
@@ -63,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
 	};
 
 	private void displayContacts(){
-		contacts.add(new Contact(Color.BLACK, "Florent", "0664256526", "", ""));
-		contacts.add(new Contact(Color.BLUE, "Kevin", "0664256526", "", ""));
 
+        for (Contact elem : bdd.getAllContacts())
+        {
+            contacts.add(elem);
+        }
 
 		ContactAdapter adapter = new ContactAdapter(MainActivity.this, contacts);
 		contactList.setAdapter(adapter);

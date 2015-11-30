@@ -9,12 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MaBaseSQLite extends SQLiteOpenHelper {
 
-	private static final String TABLE_LIVRES = "table_livres";
+	private static final String TABLE_LIVRES = "table_contact";
 	private static final String COL_ID = "ID";
 	private static final String COL_ISBN = "ISBN";
 	private static final String COL_TITRE = "Titre";
 
-	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS contactManager (" +
+	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS table_contact (" +
 			"`id` INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"`login` varchar(120), " +
 			"`number` varchar(55), " +

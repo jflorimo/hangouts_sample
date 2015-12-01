@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity {
 		addContactButton = (Button)findViewById(R.id.addButton);
 
 		addContactButton.setOnClickListener(addContactListener);
-		displayContacts();
-
-
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        displayContacts();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private void displayContacts(){
 
+        contacts.clear();
         for (Contact elem : bdd.getAllContacts())
         {
             contacts.add(elem);

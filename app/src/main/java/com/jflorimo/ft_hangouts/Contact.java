@@ -72,6 +72,6 @@ public class Contact {
 
 	public String toString()
 	{
-		return "login:" + login + " number:" + number + " email:" + email + " adress:" + adress;
+		return "id:"+ id + " login:" + login + " number:" + number + " email:" + email + " adress:" + adress;
 	}
 }

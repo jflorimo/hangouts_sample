@@ -57,12 +57,12 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 
 				View parentRow = (View) v.getParent();
 				ListView listView = (ListView) parentRow.getParent();
-				final int position = listView.getPositionForView(parentRow);
+				int position = listView.getPositionForView(parentRow);
 				Contact contact = getItem(position);
 
 				Intent intent = new Intent(getContext(), AddContactActivity.class);
 				intent.putExtra("CONTACT_ID", contact.getId());
-//				startActivity(intent);
+				getContext().startActivity(intent);
 			}
 		});
 

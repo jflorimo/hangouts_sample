@@ -3,6 +3,7 @@ package com.jflorimo.ft_hangouts;
 import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView contactList;
 	private Button addContactButton;
     private ContactBDD bdd;
+    private int color;
 	List<Contact> contacts = new ArrayList<>();
 
     @Override
@@ -36,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
         contactList = (ListView)findViewById(R.id.contactList);
 		addContactButton = (Button)findViewById(R.id.addButton);
-
 		addContactButton.setOnClickListener(addContactListener);
+        Random rnd = new Random();
+        color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(color));
     }
 
     @Override
     public void onResume() {
-        super.onResume();  // Always call the superclass method first
+        super.onResume();
         displayContacts();
     }
 
@@ -65,11 +70,22 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             android.support.v7.app.ActionBar actionBar = getSupportActionBar();
             Random rnd = new Random();
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
             actionBar.setBackgroundDrawable(new ColorDrawable(color));
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        Toast error = Toast.makeText(MainActivity.this, "orientation changed", Toast.LENGTH_LONG);
+        error.show();
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(color));
     }
 
 	View.OnClickListener addContactListener = new View.OnClickListener() {

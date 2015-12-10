@@ -62,6 +62,10 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 
 				Intent intent = new Intent(getContext(), AddContactActivity.class);
 				intent.putExtra("CONTACT_ID", contact.getId());
+				intent.putExtra("CONTACT_LOGIN", contact.getLogin());
+				intent.putExtra("CONTACT_NUMBER", contact.getNumber());
+				intent.putExtra("CONTACT_EMAIL", contact.getEmail());
+				intent.putExtra("CONTACT_ADRESS", contact.getAdress());
 				getContext().startActivity(intent);
 			}
 		});

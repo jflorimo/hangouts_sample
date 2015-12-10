@@ -38,11 +38,25 @@
         android:layout_height="wrap_content"
         android:id="@+id/adressEditText"
         android:hint="adress"/>
-
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Contact"
-        android:id="@+id/submitButton"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Contact"
+            android:id="@+id/submitButton"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/delteButton"
+            android:layout_gravity="right|center_horizontal" />
+    </LinearLayout>
+
+
+
 </LinearLayout>

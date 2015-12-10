@@ -1,7 +1,10 @@
 package com.jflorimo.ft_hangouts;
 
+import android.app.ActionBar;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+            Random rnd = new Random();
+            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            actionBar.setBackgroundDrawable(new ColorDrawable(color));
             return true;
         }
         return super.onOptionsItemSelected(item);

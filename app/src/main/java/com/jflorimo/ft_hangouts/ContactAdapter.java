@@ -36,6 +36,18 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.contact_list_item, parent, false);
 		}
 
+		convertView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ListView listView = (ListView) v.getParent();
+				int position = listView.getPositionForView(v);
+				Contact contact = getItem(position);
+				Intent intent = new Intent(getContext(), MessagesActivity.class);
+				intent.putExtra("CONTACT_ID", contact.getId());
+				getContext().startActivity(intent);
+			}
+		});
+
 		ContactViewHolder viewHolder = (ContactViewHolder) convertView.getTag();
 		if(viewHolder == null){
 			viewHolder = new ContactViewHolder();

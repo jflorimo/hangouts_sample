@@ -48,22 +48,22 @@ public class AddContactActivity extends Activity{
 	View.OnClickListener addContactListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (login.getText().toString().trim().length() > 0 && number.getText().toString().trim().length() > 0)
-			{
-				bdd.insertContact(new Contact(
-						Color.GREEN,
-						login.getText().toString(),
-						number.getText().toString(),
-						email.getText().toString(),
-						adress.getText().toString()
-				));
-				finish();
-			}
-			else
-			{
-				Toast empty = Toast.makeText(AddContactActivity.this, "empty fields!", Toast.LENGTH_LONG);
-				empty.show();
-			}
+		if (login.getText().toString().trim().length() > 0 && number.getText().toString().trim().length() > 0)
+		{
+			bdd.insertContact(new Contact(
+					Color.GREEN,
+					login.getText().toString(),
+					number.getText().toString(),
+					email.getText().toString(),
+					adress.getText().toString()
+			));
+			finish();
+		}
+		else
+		{
+			Toast empty = Toast.makeText(AddContactActivity.this, "empty fields!", Toast.LENGTH_LONG);
+			empty.show();
+		}
 		}
 	};
 
@@ -71,25 +71,25 @@ public class AddContactActivity extends Activity{
 
 		@Override
 		public void onClick(View v) {
-			if (intent.getIntExtra("CONTACT_ID", -1) != -1) {
-				Contact tmp = new Contact(
-						Color.RED,
-						login.getText().toString(),
-						number.getText().toString(),
-						email.getText().toString(),
-						adress.getText().toString()
-				);
-				bdd.updateContact(intent.getIntExtra("CONTACT_ID", -1), tmp);
-				Toast updated = Toast.makeText(AddContactActivity.this, "updated", Toast.LENGTH_LONG);
-				updated.show();
-				finish();
-			}
-			else
-			{
-				Toast error = Toast.makeText(AddContactActivity.this, "error", Toast.LENGTH_LONG);
-				error.show();
-				finish();
-			}
+		if (intent.getIntExtra("CONTACT_ID", -1) != -1) {
+			Contact tmp = new Contact(
+					Color.RED,
+					login.getText().toString(),
+					number.getText().toString(),
+					email.getText().toString(),
+					adress.getText().toString()
+			);
+			bdd.updateContact(intent.getIntExtra("CONTACT_ID", -1), tmp);
+			Toast updated = Toast.makeText(AddContactActivity.this, "updated", Toast.LENGTH_LONG);
+			updated.show();
+			finish();
+		}
+		else
+		{
+			Toast error = Toast.makeText(AddContactActivity.this, "error", Toast.LENGTH_LONG);
+			error.show();
+			finish();
+		}
 		}
 	};
 
@@ -97,18 +97,18 @@ public class AddContactActivity extends Activity{
 
 		@Override
 		public void onClick(View v) {
-			if (intent.getIntExtra("CONTACT_ID", -1) != -1) {
-				bdd.removeContactById(intent.getIntExtra("CONTACT_ID", -1));
-				Toast updated = Toast.makeText(AddContactActivity.this, "deleted", Toast.LENGTH_LONG);
-				updated.show();
-				finish();
-			}
-			else
-			{
-				Toast error = Toast.makeText(AddContactActivity.this, "error", Toast.LENGTH_LONG);
-				error.show();
-				finish();
-			}
+		if (intent.getIntExtra("CONTACT_ID", -1) != -1) {
+			bdd.removeContactById(intent.getIntExtra("CONTACT_ID", -1));
+			Toast updated = Toast.makeText(AddContactActivity.this, "deleted", Toast.LENGTH_LONG);
+			updated.show();
+			finish();
+		}
+		else
+		{
+			Toast error = Toast.makeText(AddContactActivity.this, "error", Toast.LENGTH_LONG);
+			error.show();
+			finish();
+		}
 		}
 	};
 

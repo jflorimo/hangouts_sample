@@ -50,44 +50,6 @@ public class MessagesActivity extends Activity {
         sendButton.setOnClickListener(sendButtonListener);
 
         adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
-        adapter.add("egfejgzefzeforhgz");
-        adapter.add("egfejorhgz");
-        adapter.add("dzefzeg");
-        adapter.add("egfefzefzjorhgz");
         adapter.add("non");
 
         listView.setSelection(adapter.getCount() - 1);
@@ -135,9 +97,10 @@ public class MessagesActivity extends Activity {
 			registerReceiver(new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
+					Log.d("COUILLE", "Intent recieved: " + intent.getAction());
 					switch (getResultCode()) {
 						case Activity.RESULT_OK:
-							Toast.makeText(context, "SMS sent successfully", Toast.LENGTH_SHORT).show();
+							//Toast.makeText(context, "SMS sent successfully", Toast.LENGTH_SHORT).show();
 							break;
 						case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
 							Toast.makeText(context, "Generic failure cause", Toast.LENGTH_SHORT).show();
@@ -161,17 +124,17 @@ public class MessagesActivity extends Activity {
 				public void onReceive(Context context, Intent intent) {
 					switch (getResultCode()) {
 						case Activity.RESULT_OK:
-							Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+							//Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
 							break;
 						case Activity.RESULT_CANCELED:
-							Toast.makeText(getBaseContext(), "SMS not delivered", Toast.LENGTH_SHORT).show();
+							//Toast.makeText(getBaseContext(), "SMS not delivered", Toast.LENGTH_SHORT).show();
 							break;
 					}
 				}
 			}, new IntentFilter(SMS_DELIVERED));
 
 			// Send a text based SMS
-			smsManager.sendMultipartTextMessage("+33608421973", null, smsBodyParts, sentPendingIntents, deliveredPendingIntents);
+			smsManager.sendMultipartTextMessage("+33695066772", null, smsBodyParts, sentPendingIntents, deliveredPendingIntents);
         }
     };
 

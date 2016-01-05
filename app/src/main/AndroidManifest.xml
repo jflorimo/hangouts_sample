@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jflorimo.ft_hangouts" >
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.jflorimo.ft_hangouts" >
 
-    <uses-sdk android:minSdkVersion="9" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <receiver
-        android:name=".SmsReceiver"
-        android:enabled="true"
-        android:exported="true">
-        <intent-filter android:priority="999">
-            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-        </intent-filter>
-    </receiver>
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,12 +20,21 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MessagesActivity"/>
         <activity android:name=".AddContactActivity"/>
+
+        <receiver
+            android:name=".SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 

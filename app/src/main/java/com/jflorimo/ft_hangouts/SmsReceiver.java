@@ -4,46 +4,38 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by jflorimo on 16/12/15.
  */
 public class SmsReceiver extends BroadcastReceiver {
-	private String TAG = SmsReceiver.class.getSimpleName();
+	private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+	private static final String TAG = "##SMSBroadcastReceiver";
 
 	public SmsReceiver() {
+		Log.d(TAG, "created");
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		// Get the data (SMS data) bound to intent
-		Bundle bundle = intent.getExtras();
+		Log.d(TAG, "Intent recieved: " + intent.getAction());
 
-		SmsMessage[] msgs = null;
-
-		String str = "";
-
-		if (bundle != null) {
-			// Retrieve the SMS Messages received
-			Object[] pdus = (Object[]) bundle.get("pdus");
-			msgs = new SmsMessage[pdus.length];
-
-			// For every SMS message received
-			for (int i=0; i < msgs.length; i++) {
-				// Convert Object array
-				msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-				// Sender's phone number
-				str += "SMS from " + msgs[i].getOriginatingAddress() + " : ";
-				// Fetch the text message
-				str += msgs[i].getMessageBody().toString();
-				// Newline <img src="http://codetheory.in/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;">
-				str += "\n";
+		if (intent.getAction().equals(SMS_RECEIVED)) {
+			Bundle bundle = intent.getExtras();
+			if (bundle != null) {
+				Object[] pdus = (Object[])bundle.get("pdus");
+				final SmsMessage[] messages = new SmsMessage[pdus.length];
+				for (int i = 0; i < pdus.length; i++) {
+					messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
+				}
+				if (messages.length > -1) {
+					Log.d(TAG, "Message recieved: " + messages[0].getMessageBody());
+				}
 			}
-
-			// Display the entire SMS Message
-			Log.d(TAG, str);
 		}
 	}
 }

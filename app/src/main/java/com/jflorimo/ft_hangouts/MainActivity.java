@@ -1,8 +1,11 @@
 package com.jflorimo.ft_hangouts;
 
 import android.app.ActionBar;
+import android.content.BroadcastReceiver;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -45,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
         color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(color));
+
+
+
+		IntentFilter filter = new IntentFilter("com.jflorimo.ft_hangouts.BroadcastReceiver");
+		// filter.setPriority(10); // could do this if you want to
+
+		registerReceiver(new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+
+				Log.d("%%%%%%", "Anonymous class broadcast receiver");
+			}
+		}, filter);
     }
 
     @Override

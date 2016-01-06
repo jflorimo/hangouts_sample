@@ -35,15 +35,30 @@ public class MessagesActivity extends Activity {
     private TextView loginText;
     private TextView numberText;
 
+    private Intent intent;
+    private ContactBDD bdd;
+    private Contact contact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
+        intent = getIntent();
+        bdd = new ContactBDD(this);
+        bdd.open();
+
         listView = (ListView)findViewById(R.id.listView);
         messageEditText = (EditText) findViewById(R.id.message);
         sendButton = (Button) findViewById(R.id.send);
+        loginText = (TextView) findViewById(R.id.loginTextView);
+        numberText = (TextView) findViewById(R.id.numberTextView);
 
+
+        contact = bdd.getContactById(intent.getIntExtra("CONTACT_ID", -1));
+
+        loginText.setText(contact.getLogin());
+        numberText.setText(contact.getNumber());
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
         listView.setAdapter(adapter);

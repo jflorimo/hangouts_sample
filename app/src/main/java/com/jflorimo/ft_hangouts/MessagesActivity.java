@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class MessagesActivity extends Activity {
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
-    private TextView messageTextView;
+    private EditText messageEditText;
     private Button sendButton;
     private TextView loginText;
     private TextView numberText;
@@ -40,7 +41,7 @@ public class MessagesActivity extends Activity {
         setContentView(R.layout.activity_messages);
 
         listView = (ListView)findViewById(R.id.listView);
-        messageTextView = (TextView) findViewById(R.id.message);
+        messageEditText = (EditText) findViewById(R.id.message);
         sendButton = (Button) findViewById(R.id.send);
 
 
@@ -59,24 +60,11 @@ public class MessagesActivity extends Activity {
         @Override
         public void onClick(View v) {
 			closeKeyboard();
-			/*
-			try {
-				SmsManager smsManager = SmsManager.getDefault();
-				smsManager.sendTextMessage("+33608421973", null,messageTextView.getText().toString(), null, null);
-				Toast.makeText(getApplicationContext(), "SMS Sent!",
-						Toast.LENGTH_LONG).show();
-			} catch (Exception e) {
-				Toast.makeText(getApplicationContext(),
-						"SMS faild, please try again later!",
-						Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-			*/
 
 			SmsManager smsManager = SmsManager.getDefault();
 
 			String phoneNumber = "9999999999";
-			String smsBody = "Some piece of really long text, longer than 140*n characters!";
+			String smsBody = messageEditText.getText().toString();
 
 			String SMS_SENT = "SMS_SENT";
 			String SMS_DELIVERED = "SMS_DELIVERED";
@@ -97,7 +85,6 @@ public class MessagesActivity extends Activity {
 			registerReceiver(new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
-					Log.d("COUILLE", "Intent recieved: " + intent.getAction());
 					switch (getResultCode()) {
 						case Activity.RESULT_OK:
 							//Toast.makeText(context, "SMS sent successfully", Toast.LENGTH_SHORT).show();
@@ -124,10 +111,10 @@ public class MessagesActivity extends Activity {
 				public void onReceive(Context context, Intent intent) {
 					switch (getResultCode()) {
 						case Activity.RESULT_OK:
-							//Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
 							break;
 						case Activity.RESULT_CANCELED:
-							//Toast.makeText(getBaseContext(), "SMS not delivered", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getBaseContext(), "SMS not delivered", Toast.LENGTH_SHORT).show();
 							break;
 					}
 				}

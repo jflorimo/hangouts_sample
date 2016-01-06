@@ -48,19 +48,6 @@ public class MainActivity extends AppCompatActivity {
         color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(color));
-
-
-
-		IntentFilter filter = new IntentFilter("com.jflorimo.ft_hangouts.BroadcastReceiver");
-		// filter.setPriority(10); // could do this if you want to
-
-		registerReceiver(new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-
-				Log.d("%%%%%%", "Anonymous class broadcast receiver");
-			}
-		}, filter);
     }
 
     @Override

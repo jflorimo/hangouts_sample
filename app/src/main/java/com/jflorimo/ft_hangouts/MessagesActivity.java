@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jflorimo on 11/12/15.
@@ -66,8 +67,9 @@ public class MessagesActivity extends Activity {
 
         sendButton.setOnClickListener(sendButtonListener);
 
-        adapter.add("egfejorhgz");
-        adapter.add("non");
+        List<Message> messages = bdd.getAllMessagesFromNumber(contact.getNumber());
+        for (Message msg: messages)
+            adapter.add(msg.getMessage());
 
         listView.setSelection(adapter.getCount() - 1);
     }
@@ -79,7 +81,7 @@ public class MessagesActivity extends Activity {
 
 			SmsManager smsManager = SmsManager.getDefault();
 
-			String phoneNumber = "9999999999";
+			String phoneNumber = contact.getNumber();
 			String smsBody = messageEditText.getText().toString();
 
 			String SMS_SENT = "SMS_SENT";
@@ -127,7 +129,7 @@ public class MessagesActivity extends Activity {
 				public void onReceive(Context context, Intent intent) {
 					switch (getResultCode()) {
 						case Activity.RESULT_OK:
-							Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+                            saveSms();
 							break;
 						case Activity.RESULT_CANCELED:
 							Toast.makeText(getBaseContext(), "SMS not delivered", Toast.LENGTH_SHORT).show();
@@ -137,9 +139,15 @@ public class MessagesActivity extends Activity {
 			}, new IntentFilter(SMS_DELIVERED));
 
 			// Send a text based SMS
-			smsManager.sendMultipartTextMessage("+33695066772", null, smsBodyParts, sentPendingIntents, deliveredPendingIntents);
+			smsManager.sendMultipartTextMessage(phoneNumber, null, smsBodyParts, sentPendingIntents, deliveredPendingIntents);
         }
     };
+
+    private void saveSms()
+    {
+        bdd.insertMessage(new Message(contact.getNumber(), 1, messageEditText.getText().toString()));
+        Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+    }
 
     private void closeKeyboard()
     {

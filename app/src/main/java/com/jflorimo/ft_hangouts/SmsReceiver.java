@@ -15,13 +15,15 @@ import android.widget.Toast;
 public class SmsReceiver extends BroadcastReceiver {
 	private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 	private static final String TAG = "##SMSBroadcastReceiver";
-
+    private ContactBDD bdd;
 	public SmsReceiver() {
 
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+        bdd = new ContactBDD(context);
+        bdd.open();
 //		Log.d(TAG, "Intent recieved: " + intent.getAction());
 
 		if (intent.getAction().equals(SMS_RECEIVED)) {
@@ -35,8 +37,10 @@ public class SmsReceiver extends BroadcastReceiver {
 				if (messages.length > -1) {
 					Log.d(TAG, "from:"+ messages[0].getOriginatingAddress());
 					Log.d(TAG, "Message recieved: " + messages[0].getMessageBody());
+                    bdd.insertMessage(new Message(messages[0].getOriginatingAddress(), 0, messages[0].getMessageBody()));
 				}
 			}
 		}
+        bdd.close();
 	}
 }

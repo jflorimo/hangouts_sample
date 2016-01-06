@@ -14,7 +14,7 @@ public class MaBaseSQLite extends SQLiteOpenHelper {
 	private static final String COL_ISBN = "ISBN";
 	private static final String COL_TITRE = "Titre";
 
-	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS table_contact (" +
+	private static final String DATABASE_CREATE_CONTACT = "CREATE TABLE IF NOT EXISTS table_contact (" +
 			"`id` INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"`login` varchar(120), " +
 			"`number` varchar(55), " +
@@ -22,7 +22,13 @@ public class MaBaseSQLite extends SQLiteOpenHelper {
 			"`adress` varchar(255)" +
 			");";
 
-	private static final String CREATE_BDD = DATABASE_CREATE;
+    private static final String DATABASE_CREATE_MESSAGE = "CREATE TABLE IF NOT EXISTS table_message (" +
+            "`id` INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "`number` varchar(55), " +
+            "`message` varchar(120), " +
+            "`sender` INTEGER" +
+            ");";
+
 
 	public MaBaseSQLite(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 		super(context, name, factory, version);
@@ -31,7 +37,8 @@ public class MaBaseSQLite extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		//on créé la table à partir de la requête écrite dans la variable CREATE_BDD
-		db.execSQL(CREATE_BDD);
+		db.execSQL(DATABASE_CREATE_CONTACT);
+        db.execSQL(DATABASE_CREATE_MESSAGE);
 	}
 
 	@Override

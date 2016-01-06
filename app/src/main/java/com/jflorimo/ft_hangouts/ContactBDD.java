@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,16 @@ public class ContactBDD {
 	private static final int NUM_COL_EMAIL = 3;
 	private static final String COL_ADRESS = "ADRESS";
 	private static final int NUM_COL_ADRESS = 4;
+
+    private static final String TABLE_MESSAGES = "table_message";
+    private static final String COL_ID_MESSAGE = "ID";
+    private static final int NUM_COL_ID_MESSAGE = 0;
+    private static final String COL_NUMBER_MESSAGE = "NUMBER";
+    private static final int NUM_COL_NUMBER_MESSAGE = 1;
+    private static final String COL_MESSAGE = "MESSAGE";
+    private static final int NUM_COL_MESSAGE = 2;
+    private static final String COL_SENDER = "SENDER";
+    private static final int NUM_COL_SENDER = 3;
 
 	private SQLiteDatabase bdd;
 
@@ -64,18 +75,29 @@ public class ContactBDD {
 		return bdd.insert(TABLE_CONTACTS, null, values);
 	}
 
+    public long insertMessage(Message msg){
+
+        ContentValues values = new ContentValues();
+
+        values.put(COL_NUMBER_MESSAGE, msg.getNumber());
+        values.put(COL_MESSAGE, msg.getMessage());
+        values.put(COL_SENDER, msg.getSender());
+
+        return bdd.insert(TABLE_MESSAGES, null, values);
+    }
+
 	public int updateContact(int id, Contact contact){
 		ContentValues values = new ContentValues();
 		values.put(COL_LOGIN, contact.getLogin());
 		values.put(COL_NUMBER, contact.getNumber());
 		values.put(COL_EMAIL, contact.getEmail());
 		values.put(COL_ADRESS, contact.getAdress());
-		return bdd.update(TABLE_CONTACTS, values, COL_ID + " = " +id, null);
+		return bdd.update(TABLE_CONTACTS, values, COL_ID + " = " + id, null);
 	}
 
 	public int removeContactById(int id){
 		//Suppression d'un livre de la BDD grâce à l'ID
-		return bdd.delete(TABLE_CONTACTS, COL_ID + " = " +id, null);
+		return bdd.delete(TABLE_CONTACTS, COL_ID + " = " + id, null);
 	}
 
     public Contact getContactById(int id){
@@ -85,7 +107,7 @@ public class ContactBDD {
 
 	public Contact getContactByNumber(String number){
 		//Récupère dans un Cursor les valeur correspondant à un livre contenu dans la BDD (ici on sélectionne le livre grâce à son titre)
-		Cursor c = bdd.query(TABLE_CONTACTS, null, COL_NUMBER + " LIKE \"" + number +"\"", null, null, null, null);
+		Cursor c = bdd.query(TABLE_CONTACTS, null, COL_NUMBER + " LIKE \"" + number + "\"", null, null, null, null);
 		return cursorToContact(c);
 	}
 
@@ -128,4 +150,20 @@ public class ContactBDD {
 		// return contact list
 		return contactList;
 	}
+
+    public List<Message> getAllMessagesFromNumber(String number) {
+        List<Message> messageList = new ArrayList<Message>();
+        String selectQuery = "SELECT  * FROM " + TABLE_MESSAGES + " WHERE number = '" + number + "'" ;
+        Log.d("databaseDEBUG", ": " + selectQuery);
+        Cursor c = bdd.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Message msg = new Message(c.getString(NUM_COL_NUMBER_MESSAGE), c.getInt(NUM_COL_SENDER), c.getString(NUM_COL_MESSAGE));
+                msg.setId(c.getInt(NUM_COL_ID_MESSAGE));
+                messageList.add(msg);
+            } while (c.moveToNext());
+        }
+        return messageList;
+    }
 }

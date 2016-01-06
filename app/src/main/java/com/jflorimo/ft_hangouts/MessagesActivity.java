@@ -58,7 +58,8 @@ public class MessagesActivity extends Activity {
         contact = bdd.getContactById(intent.getIntExtra("CONTACT_ID", -1));
 
         loginText.setText(contact.getLogin());
-        numberText.setText(contact.getNumber());  
+        numberText.setText(contact.getNumber());
+
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
         listView.setAdapter(adapter);

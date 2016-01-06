@@ -78,6 +78,11 @@ public class ContactBDD {
 		return bdd.delete(TABLE_CONTACTS, COL_ID + " = " +id, null);
 	}
 
+    public Contact getContactById(int id){
+        Cursor c =  bdd.rawQuery("select * from table_contact where id=" + id + "", null);
+        return cursorToContact(c);
+    }
+
 	public Contact getContactByNumber(String number){
 		//Récupère dans un Cursor les valeur correspondant à un livre contenu dans la BDD (ici on sélectionne le livre grâce à son titre)
 		Cursor c = bdd.query(TABLE_CONTACTS, null, COL_NUMBER + " LIKE \"" + number +"\"", null, null, null, null);

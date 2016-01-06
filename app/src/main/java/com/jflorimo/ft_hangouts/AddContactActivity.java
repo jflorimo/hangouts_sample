@@ -26,6 +26,7 @@ public class AddContactActivity extends Activity{
 
 	private ContactBDD bdd;
 
+	private static final String TAG = "AddContactActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +49,43 @@ public class AddContactActivity extends Activity{
 	View.OnClickListener addContactListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-		if (login.getText().toString().trim().length() > 0 && number.getText().toString().trim().length() > 0)
-		{
-			bdd.insertContact(new Contact(
-					Color.GREEN,
-					login.getText().toString(),
-					number.getText().toString(),
-					email.getText().toString(),
-					adress.getText().toString()
-			));
-			finish();
-		}
-		else
-		{
-			Toast empty = Toast.makeText(AddContactActivity.this, "empty fields!", Toast.LENGTH_LONG);
-			empty.show();
-		}
+			if (login.getText().toString().trim().length() > 0 && number.getText().toString().trim().length() > 0)
+			{
+				String phoneNum = number.getText().toString().trim();
+				boolean isNumber = false;
+				if (phoneNum.length() == 10 && phoneNum.startsWith("06")) {
+                    phoneNum = "+33"+phoneNum.substring(1);
+				}
+				if (phoneNum.length() == 12 && phoneNum.startsWith("+33")) {
+					isNumber = true;
+				}
+                Contact tmp = bdd.getContactByNumber(phoneNum);
+				if (isNumber && tmp == null) {
+					bdd.insertContact(new Contact(
+							Color.GREEN,
+							login.getText().toString(),
+                            phoneNum,
+							email.getText().toString(),
+							adress.getText().toString()
+					));
+					finish();
+				}
+                else if (tmp != null)
+                {
+                    Toast empty = Toast.makeText(AddContactActivity.this, "number already exist", Toast.LENGTH_LONG);
+                    empty.show();
+                }
+				else
+				{
+					Toast empty = Toast.makeText(AddContactActivity.this, "wrong number format!", Toast.LENGTH_LONG);
+					empty.show();
+				}
+			}
+			else
+			{
+				Toast empty = Toast.makeText(AddContactActivity.this, "empty fields!", Toast.LENGTH_LONG);
+				empty.show();
+			}
 		}
 	};
 

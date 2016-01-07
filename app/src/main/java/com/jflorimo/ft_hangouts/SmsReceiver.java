@@ -3,6 +3,7 @@ package com.jflorimo.ft_hangouts;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -37,7 +38,20 @@ public class SmsReceiver extends BroadcastReceiver {
 				if (messages.length > -1) {
 					Log.d(TAG, "from:"+ messages[0].getOriginatingAddress());
 					Log.d(TAG, "Message recieved: " + messages[0].getMessageBody());
-                    bdd.insertMessage(new Message(messages[0].getOriginatingAddress(), 0, messages[0].getMessageBody()));
+					Contact tmp = bdd.getContactByNumber(messages[0].getOriginatingAddress());
+					if (tmp != null)
+						bdd.insertMessage(new Message(messages[0].getOriginatingAddress(), 0, messages[0].getMessageBody()));
+					else
+					{
+						bdd.insertContact(new Contact(
+								Color.RED,
+								messages[0].getOriginatingAddress(),
+								messages[0].getOriginatingAddress(),
+								"",
+								""
+						));
+						bdd.insertMessage(new Message(messages[0].getOriginatingAddress(), 0, messages[0].getMessageBody()));
+					}
 				}
 			}
 		}

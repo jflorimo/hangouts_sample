@@ -21,7 +21,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ContactBDD bdd;
     private int color;
 	List<Contact> contacts = new ArrayList<>();
+	private String dateOnPause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,16 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         displayContacts();
+		if (dateOnPause!= null)
+			Toast.makeText(getBaseContext(), ""+dateOnPause, Toast.LENGTH_LONG).show();
     }
+
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		dateOnPause = getDateTime();
+	}
 
 
     @Override
@@ -86,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        Toast error = Toast.makeText(MainActivity.this, "orientation changed", Toast.LENGTH_LONG);
-        error.show();
-
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(color));
     }
@@ -113,4 +123,8 @@ public class MainActivity extends AppCompatActivity {
 		contactList.setAdapter(adapter);
 	}
 
+	private String getDateTime() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date(); return dateFormat.format(date);
+	}
 }

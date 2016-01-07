@@ -68,8 +68,12 @@ public class MessagesActivity extends Activity {
         sendButton.setOnClickListener(sendButtonListener);
 
         List<Message> messages = bdd.getAllMessagesFromNumber(contact.getNumber());
-        for (Message msg: messages)
-            adapter.add(msg.getMessage());
+        for (Message msg: messages) {
+			if (msg.getSender() == 1)
+				adapter.add("Me: "+msg.getMessage());
+			else
+				adapter.add(contact.getLogin()+": "+msg.getMessage());
+		}
 
         listView.setSelection(adapter.getCount() - 1);
     }
@@ -147,6 +151,9 @@ public class MessagesActivity extends Activity {
     {
         bdd.insertMessage(new Message(contact.getNumber(), 1, messageEditText.getText().toString()));
         Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+		adapter.add("Me: "+messageEditText.getText().toString());
+		messageEditText.setText("");
+		listView.setSelection(adapter.getCount() - 1);
     }
 
     private void closeKeyboard()
